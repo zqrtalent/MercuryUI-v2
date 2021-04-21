@@ -1,0 +1,502 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="mercury_ui">
+      <UniqueIdentifier>{8cc0db87-403f-4ce0-979a-c9c5133c0969}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="mercury_ui\Serialize">
+      <UniqueIdentifier>{4450ce9e-017a-417d-a028-de6e40e83ce9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="mercury_ui\Path">
+      <UniqueIdentifier>{557e583e-9f78-484b-ba49-49d09a08a39d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="mercury_ui\_platformCompat">
+      <UniqueIdentifier>{55445bc6-969f-49b0-b1bb-fa5893f99140}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="mercury_ui\Controls">
+      <UniqueIdentifier>{e62473fd-47a9-48fb-9707-a56cfa7eea6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="mercury_ui\XML">
+      <UniqueIdentifier>{087fdc17-9107-4f07-b749-f3dea33cb804}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="mercury_ui\Data">
+      <UniqueIdentifier>{0ddfc8b7-04b2-4eff-ac86-4134b6db5c78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="mercury_ui\String">
+      <UniqueIdentifier>{ce454a19-6ece-4c5c-ad61-151e737690b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="mercury_ui\Array">
+      <UniqueIdentifier>{7f6c47c5-696f-48cf-82af-f85106444b51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="mercury_ui\Utility">
+      <UniqueIdentifier>{2babc0fc-2f61-4338-86d9-d511a41113c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="mercury_ui\Thread">
+      <UniqueIdentifier>{d887222e-9e7b-4357-aace-f548d4276975}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SkiaTestProj.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\Serialize\EnumerableObject_IndexExtension.h">
+      <Filter>mercury_ui\Serialize</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\Serialize\Serializable.h">
+      <Filter>mercury_ui\Serialize</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\Controls\ESChildAvatar.h">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\Controls\ESChildBanner.h">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\Controls\ESChildComboBox.h">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\Controls\ESChildComboListBox.h">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\Controls\ESChildControl.h">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\Controls\ESChildControlCheckBox.h">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\Controls\ESChildControlImage.h">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\Controls\ESChildControlImageButton.h">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\Controls\ESChildControlInfo.h">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\Controls\ESChildControlLabel.h">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\Controls\ESChildControlList.h">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\Controls\ESChildControlPropertyGrid.h">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\Controls\ESChildControlTabCtrl.h">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\Controls\ESChildLookupBox.h">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\Controls\ESChildOpenColorDialogBox.h">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\Controls\ESChildOpenFileBox.h">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\Controls\ESChildOpenFontDialogBox.h">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\Controls\ESChildProgressCtrl.h">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\Controls\ESChildScrollBar.h">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\Controls\ESChildScrollView.h">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\Controls\ESChildSlider.h">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\Controls\ESChildTabView.h">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\Controls\ESChildTextBox.h">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\Controls\ESEasyMotion.h">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\Controls\ESEnumerableModifyDlg.h">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\Controls\ESEnumerableModifyWnd.h">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\Controls\ESLocalizationMan.h">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\Controls\ESSerializableModifyDlg.h">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\Controls\ESSerializableModifyWnd.h">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\Controls\ESSimpleRenderView.h">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\Controls\MercuryBaseViewInfo.h">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\Controls\MercuryBaseWnd.h">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\Controls\MercuryGUI.h">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\Controls\MercuryLayerMan.h">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\Path\Path.h">
+      <Filter>mercury_ui\Path</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\_platformCompat\PlatformBufferedString.h">
+      <Filter>mercury_ui\_platformCompat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\_platformCompat\PlatformCompat.h">
+      <Filter>mercury_ui\_platformCompat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\_platformCompat\PlatformCompat_Win.h">
+      <Filter>mercury_ui\_platformCompat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\_platformCompat\PlatformCriticalSection.h">
+      <Filter>mercury_ui\_platformCompat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\_platformCompat\PlatformCriticalSection_Win.h">
+      <Filter>mercury_ui\_platformCompat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\_platformCompat\PlatformDateTime.h">
+      <Filter>mercury_ui\_platformCompat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\_platformCompat\PlatformDeviceContext.h">
+      <Filter>mercury_ui\_platformCompat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\_platformCompat\PlatformEvent.h">
+      <Filter>mercury_ui\_platformCompat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\_platformCompat\PlatformEvent_Win.h">
+      <Filter>mercury_ui\_platformCompat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\_platformCompat\PlatformFont.h">
+      <Filter>mercury_ui\_platformCompat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\_platformCompat\PlatformImage.h">
+      <Filter>mercury_ui\_platformCompat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\_platformCompat\PlatformLongBinary.h">
+      <Filter>mercury_ui\_platformCompat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\_platformCompat\PlatformPoint.h">
+      <Filter>mercury_ui\_platformCompat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\_platformCompat\PlatformRect.h">
+      <Filter>mercury_ui\_platformCompat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\_platformCompat\PlatformRect_Win.h">
+      <Filter>mercury_ui\_platformCompat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\_platformCompat\PlatformRgn.h">
+      <Filter>mercury_ui\_platformCompat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\_platformCompat\PlatformRgn_Win.h">
+      <Filter>mercury_ui\_platformCompat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\_platformCompat\PlatformSize.h">
+      <Filter>mercury_ui\_platformCompat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\XML\Markup.h">
+      <Filter>mercury_ui\XML</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\String\StringDecoder.h">
+      <Filter>mercury_ui\String</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\Data\VRowSet.h">
+      <Filter>mercury_ui\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\Array\AutoSortedArray.h">
+      <Filter>mercury_ui\Array</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\Array\AutoSortedArrayInt64.h">
+      <Filter>mercury_ui\Array</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\Array\AutoSortedArrayTempl.h">
+      <Filter>mercury_ui\Array</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\Array\ChainTempl.h">
+      <Filter>mercury_ui\Array</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\Array\List.h">
+      <Filter>mercury_ui\Array</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\Array\StringToBasicArray.h">
+      <Filter>mercury_ui\Array</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\Array\StringToIntArray.h">
+      <Filter>mercury_ui\Array</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\Array\StringToPtrArray.h">
+      <Filter>mercury_ui\Array</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\Array\StringToStringArray.h">
+      <Filter>mercury_ui\Array</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\Utility\GrowableMemory.h">
+      <Filter>mercury_ui\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\Utility\StringHelper.h">
+      <Filter>mercury_ui\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\Controls\ESFrameBase_Win.h">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\Thread\WinThread.h">
+      <Filter>mercury_ui\Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\Data\DataFieldCopier.h">
+      <Filter>mercury_ui\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="PokerLobbyDlg.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\_platformCompat\PlatformDeviceContext_Skia.h">
+      <Filter>mercury_ui\_platformCompat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\_platformCompat\PlatformFont_Skia.h">
+      <Filter>mercury_ui\_platformCompat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third_party\mercury_ui\_platformCompat\PlatformImage_Skia.h">
+      <Filter>mercury_ui\_platformCompat</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SkiaTestProj.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\mercury_ui\Serialize\EnumerableObject_IndexExtension.cpp">
+      <Filter>mercury_ui\Serialize</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\mercury_ui\Serialize\Serializable.cpp">
+      <Filter>mercury_ui\Serialize</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\mercury_ui\Serialize\Serializable_SourceCodeGenerate.cpp">
+      <Filter>mercury_ui\Serialize</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\mercury_ui\Controls\ESChildAvatar.cpp">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\mercury_ui\Controls\ESChildBanner.cpp">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\mercury_ui\Controls\ESChildComboBox.cpp">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\mercury_ui\Controls\ESChildComboListBox.cpp">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\mercury_ui\Controls\ESChildControl.cpp">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\mercury_ui\Controls\ESChildControlCheckBox.cpp">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\mercury_ui\Controls\ESChildControlImage.cpp">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\mercury_ui\Controls\ESChildControlImageButton.cpp">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\mercury_ui\Controls\ESChildControlInfo.cpp">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\mercury_ui\Controls\ESChildControlLabel.cpp">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\mercury_ui\Controls\ESChildControlList.cpp">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\mercury_ui\Controls\ESChildControlPropertyGrid.cpp">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\mercury_ui\Controls\ESChildControlTabCtrl.cpp">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\mercury_ui\Controls\ESChildLookupBox.cpp">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\mercury_ui\Controls\ESChildOpenColorDialogBox.cpp">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\mercury_ui\Controls\ESChildOpenFileBox.cpp">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\mercury_ui\Controls\ESChildOpenFontDialogBox.cpp">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\mercury_ui\Controls\ESChildProgressCtrl.cpp">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\mercury_ui\Controls\ESChildScrollBar.cpp">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\mercury_ui\Controls\ESChildScrollView.cpp">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\mercury_ui\Controls\ESChildSlider.cpp">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\mercury_ui\Controls\ESChildTabView.cpp">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\mercury_ui\Controls\ESChildTextBox.cpp">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\mercury_ui\Controls\ESEasyMotion.cpp">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\mercury_ui\Controls\ESEnumerableModifyDlg.cpp">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\mercury_ui\Controls\ESEnumerableModifyWnd.cpp">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\mercury_ui\Controls\ESLocalizationMan.cpp">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\mercury_ui\Controls\ESSerializableModifyDlg.cpp">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\mercury_ui\Controls\ESSerializableModifyWnd.cpp">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\mercury_ui\Controls\ESSimpleRenderView.cpp">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\mercury_ui\Controls\MercuryBaseViewInfo.cpp">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\mercury_ui\Controls\MercuryBaseWnd.cpp">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\mercury_ui\Controls\MercuryBaseWnd_Designer.cpp">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\mercury_ui\Controls\MercuryGUI.cpp">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\mercury_ui\Controls\MercuryLayerMan.cpp">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\mercury_ui\Path\Path.cpp">
+      <Filter>mercury_ui\Path</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\mercury_ui\_platformCompat\PlatformBufferedString.cpp">
+      <Filter>mercury_ui\_platformCompat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\mercury_ui\_platformCompat\PlatformCompat_Win.cpp">
+      <Filter>mercury_ui\_platformCompat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\mercury_ui\_platformCompat\PlatformCriticalSection_Win.cpp">
+      <Filter>mercury_ui\_platformCompat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\mercury_ui\_platformCompat\PlatformDateTime.cpp">
+      <Filter>mercury_ui\_platformCompat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\mercury_ui\_platformCompat\PlatformEvent_Win.cpp">
+      <Filter>mercury_ui\_platformCompat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\mercury_ui\_platformCompat\PlatformLongBinary.cpp">
+      <Filter>mercury_ui\_platformCompat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\mercury_ui\_platformCompat\PlatformRect_Win.cpp">
+      <Filter>mercury_ui\_platformCompat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\mercury_ui\_platformCompat\PlatformRgn_Win.cpp">
+      <Filter>mercury_ui\_platformCompat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\mercury_ui\XML\Markup.cpp">
+      <Filter>mercury_ui\XML</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\mercury_ui\String\StringDecoder.cpp">
+      <Filter>mercury_ui\String</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\mercury_ui\Data\VRowSet.cpp">
+      <Filter>mercury_ui\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\mercury_ui\Data\VRowSetDataConvertion.cpp">
+      <Filter>mercury_ui\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\mercury_ui\Array\AutoSortedArray.cpp">
+      <Filter>mercury_ui\Array</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\mercury_ui\Array\ChainTempl.cpp">
+      <Filter>mercury_ui\Array</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\mercury_ui\Utility\GrowableMemory.cpp">
+      <Filter>mercury_ui\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\mercury_ui\Utility\StringHelper.cpp">
+      <Filter>mercury_ui\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\mercury_ui\Controls\ESFrameBase_Win.cpp">
+      <Filter>mercury_ui\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\mercury_ui\Thread\WinThread.cpp">
+      <Filter>mercury_ui\Thread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\mercury_ui\Data\DataFieldCopier.cpp">
+      <Filter>mercury_ui\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="PokerLobbyDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\mercury_ui\_platformCompat\PlatformDeviceContext_Skia.cpp">
+      <Filter>mercury_ui\_platformCompat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\mercury_ui\_platformCompat\PlatformFont_Skia.cpp">
+      <Filter>mercury_ui\_platformCompat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third_party\mercury_ui\_platformCompat\PlatformImage_Skia.cpp">
+      <Filter>mercury_ui\_platformCompat</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="SkiaTestProj.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="small.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="SkiaTestProj.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+</Project>

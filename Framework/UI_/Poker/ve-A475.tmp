@@ -1,0 +1,168 @@
+// PokerLobbyWnd.cpp : implementation file
+//
+
+#include "stdafx.h"
+#include "..\..\Controls\MercuryGUI.h"
+
+#include "ChildControls\ESChildControlButton.h"
+#include "ChildControls\ESChildControlLogo.h"
+#include "ChildControls\ESChildControlLobbyTab.h"
+#include "ChildControls\ESChildControlLobbyBanner.h"
+#include "ChildControls\ESChildControlLobbyUserInfo.h"
+#include "ChildControls\ESChildControlImageButton.h"
+#include "ChildControls\ESChildControlInvisible.h"
+#include "ChildControls\ESChildControlLabel.h"
+
+#include "..\..\Controls\ESItemsList.h"
+#include "..\..\Image\ImageHelper.h"
+#include "..\..\Path\Path.h"
+#include "PokerLobbyWnd.h"
+
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+// PokerLobbyWnd
+
+PokerLobbyWnd::PokerLobbyWnd() : MercuryBaseView(){
+	m_bUseForegroundColor	= 0;
+	m_crForeground			= RGB(0, 0, 0);
+	m_nAlpha				= 50;
+	m_pGUI					= PokerGUI::GetInstance();
+	}
+
+IMPLEMENT_DYNCREATE(PokerLobbyWnd, MercuryBaseView)
+
+PokerLobbyWnd::~PokerLobbyWnd(){
+	}
+
+BEGIN_MESSAGE_MAP(PokerLobbyWnd, MercuryBaseView)
+	ON_WM_LBUTTONDOWN	()
+	ON_WM_LBUTTONDBLCLK	()
+	ON_WM_LBUTTONUP		()
+	ON_WM_SIZE			()
+	ON_WM_MOUSEMOVE		()
+	ON_WM_GETDLGCODE	()
+END_MESSAGE_MAP()
+
+BOOL 
+PokerLobbyWnd::Create(LPCTSTR lpszClassName,
+						LPCTSTR lpszWindowName, DWORD dwStyle,
+						const RECT& rect,
+						CWnd* pParentWnd, UINT nID,
+						CCreateContext* pContext /*= NULL*/){
+	BOOL bRet =  CWnd::Create(lpszClassName, lpszWindowName, dwStyle, rect, pParentWnd, nID, pContext);
+	if( bRet ){
+		CRect rcClient;
+		GetClientRect(rcClient);
+		// Create child controls.
+		CreateChildControls();
+		}
+	return bRet;
+	}
+
+void
+PokerLobbyWnd::OnPrePaint(CRect& rcRepaint){
+	}
+
+void 
+PokerLobbyWnd::OnPaintClient(CDC* pDC, CRect* pRectDC, CRect* pRectClient){
+	RedrawChildControls	(m_pFirstChild, pDC, pRectDC, pRectClient);
+	}
+
+
+void
+PokerLobbyWnd::OnShowWindow(BOOL bShow, UINT nStatus){
+	CWnd::OnShowWindow(bShow, nStatus);
+	}
+
+void
+PokerLobbyWnd::OnChar(UINT nChar, UINT nRepCnt, UINT nFlags){
+	CWnd::OnChar(nChar, nRepCnt, nFlags);
+	}
+
+void
+PokerLobbyWnd::OnSize(UINT nType, int cx, int cy){
+	CWnd::OnSize(nType, cx, cy);
+	// Resize child controls.
+	CreateChildControls();
+	}
+
+void
+PokerLobbyWnd::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags){
+	_AFX_THREAD_STATE* pState = AfxGetThreadState();
+	MercuryBaseView::OnKeyDown(nChar, nRepCnt, nFlags);
+	}
+
+UINT 
+PokerLobbyWnd::OnGetDlgCode(){
+	return DLGC_WANTALLKEYS|DLGC_WANTARROWS;
+	}
+
+BOOL
+PokerLobbyWnd::OnMouseActivate(CWnd* pDesktopWnd, UINT nHitTest, UINT message){
+	return CWnd::OnMouseActivate(pDesktopWnd, nHitTest, message);
+	}
+
+void 
+PokerLobbyWnd::OnMouseMove(UINT nFlags, CPoint point){
+	MercuryBaseView::OnMouseMove(nFlags, point);
+	}
+
+BOOL 
+PokerLobbyWnd::OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message){
+	return MercuryBaseView::OnSetCursor(pWnd, nHitTest, message);
+	}
+
+void 
+PokerLobbyWnd::OnLButtonUp(UINT nFlags, CPoint point){
+	MercuryBaseView::OnLButtonUp(nFlags, point);
+	}
+
+void 
+PokerLobbyWnd::OnLButtonDblClk(UINT nFlags, CPoint point){
+	MercuryBaseView::OnLButtonDblClk(nFlags, point);
+	}
+
+void
+PokerLobbyWnd::OnLButtonDown(UINT nFlags, CPoint point){
+/*
+	m_bUseForegroundColor = FALSE;
+	CRect rcRedraw (point.x - 40, point.y - 40, point.x + 40, point.y + 40);
+	RedrawRect(rcRedraw, 1);
+*/
+
+	CRect rcRedraw (point.x - 40, point.y - 40, point.x + 100, point.y + 40);
+	RedrawRect(rcRedraw, 1);
+
+//	m_bUseForegroundColor = TRUE;
+
+	//int nSeat = 0;
+	//SetPotAmount(nSeat, GetPotAmount(nSeat) + 90);
+	//Anim_CollectChips();
+
+	/*
+	CRect rcSeat;
+	int nSeat = 0;
+	if( GetSeatPanelByPoint(point, nSeat, rcSeat) ){
+		SetupSeatTimer	(nSeat, 20, 0);
+		SetActiveSeat	(nSeat, true, true);
+		}*/
+
+	MercuryBaseView::OnLButtonDown(nFlags, point);
+	}
+
+// ######################################################
+//
+//	Operations.
+//
+// ######################################################
+
+bool
+PokerLobbyWnd::CreateChildControls(){
+	return true;
+	}
+

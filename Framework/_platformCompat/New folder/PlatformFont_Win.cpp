@@ -1,0 +1,253 @@
+#include "stdafx.h"
+#include "PlatformFont_Win.h"
+#include "PlatformDeviceContext.h"
+#include "../Utility/StringHelper.h"
+#include "../EmbedeedFont/EmbedeedFontMan.h"
+
+//////////////////////////////////////////////////////////////////////
+// Construction/Destruction
+//////////////////////////////////////////////////////////////////////
+
+Font::Font() : font_(NULL) {
+	}
+
+Font::~Font() {
+	DeleteObject();
+	}
+
+BOOL
+Font::Attach(FONTDef font){
+	if( !IsNull() ){
+		ASSERT(FALSE);
+		return FALSE;
+		}
+	font_ = font;
+	return TRUE;
+	}
+
+FONTDef
+Font::Detach(){
+	if( IsNull() ){
+		ASSERT(FALSE);
+		return FALSE;
+		}
+	FONTDef ret = font_;
+	font_ = NULL;
+	return ret;
+	}
+
+BOOL
+Font::DeleteObject(){
+	if( !IsNull() ){
+		::DeleteObject(font_);
+		font_ = NULL;
+		}
+	return TRUE;
+	}
+
+BOOL
+Font::CopyFont(Font* pCopyInto){
+	if( IsNull() || !pCopyInto )
+		return FALSE;
+
+	if( !pCopyInto->IsNull() )
+		pCopyInto->DeleteObject();
+
+	LOGFONT lf;
+	GetLogFont(&lf);
+	return pCopyInto->CreateFontIndirect(&lf);
+	}
+
+BOOL
+Font::CreateFont(const TCHAR* pszFontName, int nHeight){
+	if( !IsNull() )
+		return FALSE;
+
+	LOGFONT lf;
+	memset(&lf, 0, sizeof(LOGFONT));
+	lf.lfHeight			= nHeight;
+	lf.lfWeight			= FW_REGULAR;
+	lf.lfItalic			= 0;
+	lf.lfUnderline		= 0;
+	lf.lfStrikeOut		= 0;
+	lf.lfCharSet		= ANSI_CHARSET;
+	lf.lfQuality		= PROOF_QUALITY;
+	lf.lfPitchAndFamily = DEFAULT_PITCH;
+	strcpy_s(lf.lfFaceName, 32, pszFontName);
+	return CreateFontIndirect(&lf);
+	}
+
+int
+Font::GetLogFont(LOGFONT* pLogFont){
+	if( IsNull() || !pLogFont )
+		return 0;
+	return GetObject(font_, sizeof(LOGFONT), pLogFont);
+	}
+
+BOOL
+Font::CreateFontIndirect(LOGFONT* pLogFont){
+	if( !IsNull() || !pLogFont )
+		return FALSE;
+	font_ = ::CreateFontIndirect(pLogFont);
+	return !IsNull();
+	}
+
+BOOL
+Font::GetTextSize(_String* pStr, _Size& szText){
+	if( IsNull() )
+		return FALSE;
+
+	_DC memDC;
+	memDC.CreateCompatibleDC(NULL);
+	memDC.SelectObject		(font_);
+
+	LOGFONT lf;
+	GetLogFont(&lf);
+
+	wchar_t	wszTemp[255];
+	int		nLen = StringHelper::UTF8ToUnicode(pStr, wszTemp, 254);
+
+	EmbedeedFontMan* pEmbedeedFontMan = EmbedeedFontMan::GetInstance();
+	int nFontId = pEmbedeedFontMan->GetEmbedeedFontId(lf.lfFaceName);
+	if( nFontId == -1 )
+		memDC.GetTextExtentPoint32W(wszTemp, nLen, szText);
+	else
+		pEmbedeedFontMan->GetTextSize(&memDC, wszTemp, nLen, nFontId, szText);
+
+	memDC.DeleteDC();
+	return TRUE;
+	}
+
+int
+Font::GetSymbolIndexByXOffset(_String* pStr, int nXTextStart, int nXSymbolAt){
+	if( IsNull() || !pStr || !pStr->GetLength() )
+		return -1;
+
+	_DC memDC;
+	memDC.CreateCompatibleDC(NULL);
+	memDC.SelectObject(*this);
+
+	LOGFONT lf;
+	GetLogFont(&lf);
+
+	wchar_t	wszTemp[255];
+	int		nLen = StringHelper::UTF8ToUnicode(pStr, wszTemp, 254);
+
+	EmbedeedFontMan*	pEmbedeedFontMan = EmbedeedFontMan::GetInstance();
+	int					nFontId = pEmbedeedFontMan->GetEmbedeedFontId(lf.lfFaceName);
+	_Size				szText(0, 0);
+	wchar_t				wszSymbol[2];
+	int					nRet = -1;
+
+	for(int i=0; i<nLen; i++){
+		wszSymbol[0] = wszTemp[i];
+		wszSymbol[1] = 0;
+
+		if( nFontId == -1 )
+			memDC.GetTextExtentPoint32W(wszSymbol, 1, szText);
+		else{
+			if( pEmbedeedFontMan->GetTextSize(&memDC, wszSymbol, 1, nFontId, szText) )
+				szText.cx += EmbedeedFontMan::GetDistanceBetweenSymbols();
+			}
+		nXTextStart += szText.cx;
+
+		if( nXSymbolAt <= nXTextStart ){
+			if( nXSymbolAt <= (nXTextStart - szText.cx/2) )
+				nRet = i;
+			else
+				nRet = i + 1;
+			break;
+			}
+		}
+
+	if( nXSymbolAt > nXTextStart )
+		nRet = (nLen - 1);
+
+	memDC.DeleteDC();
+	return nRet;
+	}
+
+int
+Font::GetSymbolWidthArray(_String* pStr, CDWordVector& arrSymbolWidth){
+	if( IsNull() || !pStr || !pStr->GetLength() )
+		return 0;
+
+	_DC memDC;
+	memDC.CreateCompatibleDC(NULL);
+	memDC.SelectObject		(*this);
+
+	LOGFONT lf;
+	GetLogFont(&lf);
+
+	wchar_t	wszTemp[255];
+	int		nLen = StringHelper::UTF8ToUnicode(pStr, wszTemp, 254);
+
+	EmbedeedFontMan*	pEmbedeedFontMan	= EmbedeedFontMan::GetInstance();
+	int					nFontId				= pEmbedeedFontMan->GetEmbedeedFontId(lf.lfFaceName);
+	_Size				szText(0, 0);
+	wchar_t				wszSymbol[2];
+	int					nRet = 0;
+
+	for(int i=0; i<nLen; i++){
+		wszSymbol[0] = wszTemp[i];
+		wszSymbol[1] = 0;
+		if( nFontId == -1 )
+			memDC.GetTextExtentPoint32W(wszSymbol, 1, szText);
+		else{
+			if( pEmbedeedFontMan->GetTextSize(&memDC, wszSymbol, 1, nFontId, szText) )
+				szText.cx += EmbedeedFontMan::GetDistanceBetweenSymbols();
+			else
+				continue;
+			}
+		arrSymbolWidth.push_back(szText.cx);
+		nRet ++;
+		}
+	memDC.DeleteDC();
+	return nRet;
+	}
+
+BOOL
+Font::StretchedTextFont(Font* pFontOut, float fStretchCX, float fStretchCY, bool bUnderLine, bool bBold){
+	if( IsNull() || !pFontOut )
+		return FALSE;
+
+	LOGFONT lf;
+	if( !GetLogFont(&lf) )
+		return FALSE;
+/*
+	if( fStretchCX < 0.8f )
+		fStretchCX = 0.08f;
+*/
+	float fMin = 0.5f, fMax = 1.8f;
+	if( fStretchCY < fMin )
+		fStretchCY = fMin;
+
+	if( fStretchCY > fMax )
+		fStretchCY = fMax;
+
+	if( fStretchCX > fMax )
+		fStretchCX = fMax;
+
+	lf.lfWidth	= (lf.lfWidth * fStretchCX);
+	lf.lfHeight = (lf.lfHeight * fStretchCY);
+
+	if( bUnderLine )
+		lf.lfUnderline = 1;
+//	else
+//		lf.lfUnderline = 0;
+
+	if( bBold )
+		lf.lfWeight = FW_BOLD;
+	return pFontOut->CreateFontIndirect(&lf);
+	}
+
+bool
+Font::IsEmbedeedFontAvailable(){
+	if( IsNull() )
+		return false;
+	LOGFONT lf;
+	GetLogFont(&lf);
+	EmbedeedFontMan* pEmbedeedFontMan = EmbedeedFontMan::GetInstance();
+	int nFontId = pEmbedeedFontMan->GetEmbedeedFontId(lf.lfFaceName);
+	return (nFontId != -1);
+	}

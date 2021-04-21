@@ -1,0 +1,195 @@
+// PokerTableWnd.cpp : implementation file
+//
+
+#include "stdafx.h"
+#include <math.h>
+#include "..\..\Controls\MercuryGUI.h"
+
+#include "ChildControls\ESChildControlButton.h"
+#include "ChildControls\ESChildControlShortcutBtn.h"
+#include "ChildControls\ESChildControlSlider.h"
+#include "ChildControls\ESChildControlPreAction.h"
+#include "ChildControls\ESChildControlActionPanel.h"
+#include "ChildControls\ESChildControlTableCards.h"
+#include "ChildControls\ESChildControlTable.h"
+#include "ChildControls\ESChildControlSeat.h"
+#include "ChildControls\ESChildControlSeatCards.h"
+#include "ChildControls\ESChildControlChips.h"
+#include "ChildControls\ESChildControlDealer.h"
+#include "ChildControls\ESChildControlSeatProgressBar.h"
+#include "ChildControls\ESChildControlTabView.h"
+#include "ChildControls\ESChildControlTabViewChatPage.h"
+#include "ChildControls\ESChildControlTabViewInfoPage.h"
+#include "ChildControls\ESChildControlMoneyEdit.h"
+#include "ChildControls\ESChildControlLabel.h"
+#include "ChildControls\ESChildControlAddChips.h"
+#include "ChildControls\ESChildControlFlatButton.h"
+
+#include "..\..\Image\ImageHelper.h"
+#include "..\..\Path\Path.h"
+#include "..\..\Protocol\PokerPacket.h"
+#include "PokerTableWnd.h"
+
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+// PokerTableWnd
+
+UINT	_stdcall	
+PokerTableWnd::AnimateCollectChipsProc(WinThread* pThread){
+	PokerTableWnd*	pTableWnd	= (PokerTableWnd*)pThread->GetThreadParameter();
+
+	int 			nSecAnimate	= pTableWnd->m_nCollectChipsAnimateSec;
+	int 			nFrameCt	= 20;
+	int 			nLoop		= 0;
+	int 			nCt			= 1;//pTableWnd->m_nMaxPlayerCt;
+	int 			nMainChips	= pTableWnd->m_nCollectChipsAmount;
+
+	float			fArrPosX[]	= {0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f};
+	float			fArrPosY[]	= {0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f};
+	CRect			rcChips	[]	= {CRect(0, 0, 0, 0), CRect(0, 0, 0, 0), CRect(0, 0, 0, 0), CRect(0, 0, 0, 0), CRect(0, 0, 0, 0),
+								   CRect(0, 0, 0, 0), CRect(0, 0, 0, 0), CRect(0, 0, 0, 0), CRect(0, 0, 0, 0), CRect(0, 0, 0, 0)};
+
+	// Collect chips controls.
+	ESChildControlChips* pMainChips = pTableWnd->GetMainChipsControl();
+	ESChildControlChips* ppChips[]	= {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL};
+
+	while( nLoop < nCt ){
+		PokerTableSeatInfo* pSeat = pTableWnd->GetSeatInfo(nLoop);
+		if( !pSeat || pSeat->GetPotAmount() <= 0 ){
+			nLoop ++;
+			continue;
+			}
+
+		ppChips[nLoop] = pTableWnd->GetChipsControl(nLoop);
+		if( ppChips[nLoop] )
+			rcChips[nLoop] = ppChips[nLoop]->GetClientRect();
+		
+		if( ppChips[nLoop] ){
+			fArrPosX[nLoop] = ppChips[nLoop]->GetLogicalPosX();
+			fArrPosY[nLoop] = ppChips[nLoop]->GetLogicalPosY();
+			}
+		nLoop ++;
+		}
+	// }}
+
+	// Animation movement(s)
+	int		nFrame = 0;
+	CRect	rcChipsBound;
+	float	fDelay		= 1000.0f / ((float)(nFrameCt / ((float)nSecAnimate)));
+	float   fAccelerate = 0.97f;
+
+	while( nFrame < nFrameCt ){
+		int nLoop1 = 0;
+		rcChipsBound.SetRect(0, 0, 0, 0);
+
+		CPtrArray* pArrRects = new CPtrArray();
+		while( nLoop1 < nCt ){
+			if( !ppChips[nLoop1] ){
+				nLoop1 ++;
+				continue;
+				}
+
+			if( pThread->IsStopEventSignaled() ){
+				// Finished.
+				pTableWnd->AnimationFinished_CollectChips();
+				return 0L; // Stop animation.
+				}
+
+			CRect	rcMainChips	= pMainChips->GetClientRect();
+			CPoint	ptMiddle(rcMainChips.left + rcMainChips.Width()/2, rcMainChips.top + rcMainChips.Height()/2);
+
+			ESChildControlChips*	pChips		= ppChips[nLoop1];
+			CRect					rcRectChips	= pChips->GetClientRect();
+			CRect					rcChipOrig	= rcChips[nLoop1];
+			rcRectChips = rcChipOrig;
+			CPoint					ptMiddleChips (rcRectChips.left + rcRectChips.Width()/2, rcRectChips.top + rcRectChips.Height()/2);
+			int						nMoveCY		= ptMiddle.y - ptMiddleChips.y;
+			int						nMoveCX		= ptMiddle.x - ptMiddleChips.x;
+			int						nOffsetY	= rcRectChips.top + (nMoveCY / nFrameCt)*(nFrame + 1);
+			int						nOffsetX	= rcRectChips.left + (nMoveCX / nFrameCt)*(nFrame + 1);
+
+			CRect rcTableWnd;
+			pTableWnd->GetClientRect(rcTableWnd);
+
+			float fY = (nOffsetY*1.0f) / ((float)rcTableWnd.Height());
+			float fX = (nOffsetX*1.0f) / ((float)rcTableWnd.Width());
+
+			pChips->SetLogicalPos			(fX, fY);
+			pChips->OwnerWindowSizeChanged	(rcTableWnd.Width(), rcTableWnd.Height());
+			
+			rcRectChips |= pChips->GetClientRect();
+			pThread->Lock(); // Lock
+			pArrRects->Add(new CRect(rcRectChips.left, rcRectChips.top, rcRectChips.right, rcRectChips.bottom));
+			pThread->Unlock(); // Unlock
+
+			rcChipsBound |= pChips->GetClientRect();
+			nLoop1 ++;
+			}
+
+		::PostMessage(pTableWnd->GetSafeHwnd(), WM_REDRAW_RECT, 1, (LPARAM)pArrRects);
+		int nSleep = (int)(fDelay*fAccelerate);
+		Sleep(1000);
+
+		fAccelerate *= fAccelerate;
+		nFrame		++;
+		}
+
+	// Wait
+	Sleep(30);
+
+	// Clear seat pot amounts.
+	int nLoop1 = 0;
+	while( nLoop1 < nCt ){
+		if( !ppChips[nLoop1] ){
+			nLoop1 ++;
+			continue;
+			}
+
+		ESChildControlChips*	pChips		= ppChips[nLoop1];
+		CRect					rcRectChips	= pChips->GetClientRect();
+
+		CRect rcTableWnd;
+		pTableWnd->GetClientRect(rcTableWnd);
+		
+		pChips->SetAmount				(0, false);
+		pChips->SetLogicalPos			(fArrPosX[nLoop1], fArrPosY[nLoop1]);
+		pChips->OwnerWindowSizeChanged	(rcTableWnd.Width(), rcTableWnd.Height());
+		nLoop1 ++;
+		}
+
+	if( pThread->IsStopEventSignaled() ){
+		// Finished.
+		pTableWnd->AnimationFinished_CollectChips();
+		return 0L; // Stop animation.
+		}
+
+	pThread->Lock(); // Lock
+	// Redraw all chips area at once.
+	CPtrArray* pArrRects = new CPtrArray();
+	pArrRects->Add(new CRect(rcChipsBound.left, rcChipsBound.top, rcChipsBound.right, rcChipsBound.bottom));
+	CRect	rcMainChips	= pMainChips->GetClientRect();
+	pArrRects->Add(new CRect(rcMainChips.left, rcMainChips.top, rcMainChips.right, rcMainChips.bottom));
+	pTableWnd->SetMainPotAmount	(nMainChips, false);
+	::PostMessage(pTableWnd->GetSafeHwnd(), WM_REDRAW_RECT, 1, (LPARAM)pArrRects);
+	pThread->Unlock(); // Unlock
+
+	// Finished.
+	pTableWnd->AnimationFinished_CollectChips();
+	return 0L;
+	}
+
+void
+PokerTableWnd::AnimationFinished_CollectChips(){
+	if( m_pCollectChipsThread ){
+		BOOL bManualDelete = (BOOL)m_pCollectChipsThread->GetParam("MANUALDELETE");
+		if( !bManualDelete && m_pCollectChipsThread ){
+			delete m_pCollectChipsThread;
+			m_pCollectChipsThread = NULL;
+			}
+		}
+	}

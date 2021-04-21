@@ -1,0 +1,313 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{215A5842-C26C-4C7A-9740-C3BBB66B45DA}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>SkiaTestProj</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_SKIA;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>..\third_party\skia\include\core;..\third_party\skia\include\config;..\third_party\mercury_ui</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>..\third_party\skia\out\Debug;</AdditionalLibraryDirectories>
+      <AdditionalDependencies>OpenGL32.lib;Usp10.lib;skia_core.lib;skia_ports.lib;skia_effects.lib;skia_images.lib;skia_utils.lib;skia_skgpu.lib;skia_pdf.lib;skia_sfnt.lib;skia_opts.lib;skia_opts_ssse3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\third_party\mercury_ui\Array\AutoSortedArray.h" />
+    <ClInclude Include="..\third_party\mercury_ui\Array\AutoSortedArrayInt64.h" />
+    <ClInclude Include="..\third_party\mercury_ui\Array\AutoSortedArrayTempl.h" />
+    <ClInclude Include="..\third_party\mercury_ui\Array\ChainTempl.h" />
+    <ClInclude Include="..\third_party\mercury_ui\Array\List.h" />
+    <ClInclude Include="..\third_party\mercury_ui\Array\StringToBasicArray.h" />
+    <ClInclude Include="..\third_party\mercury_ui\Array\StringToIntArray.h" />
+    <ClInclude Include="..\third_party\mercury_ui\Array\StringToPtrArray.h" />
+    <ClInclude Include="..\third_party\mercury_ui\Array\StringToStringArray.h" />
+    <ClInclude Include="..\third_party\mercury_ui\Controls\ESChildAvatar.h" />
+    <ClInclude Include="..\third_party\mercury_ui\Controls\ESChildBanner.h" />
+    <ClInclude Include="..\third_party\mercury_ui\Controls\ESChildComboBox.h" />
+    <ClInclude Include="..\third_party\mercury_ui\Controls\ESChildComboListBox.h" />
+    <ClInclude Include="..\third_party\mercury_ui\Controls\ESChildControl.h" />
+    <ClInclude Include="..\third_party\mercury_ui\Controls\ESChildControlCheckBox.h" />
+    <ClInclude Include="..\third_party\mercury_ui\Controls\ESChildControlImage.h" />
+    <ClInclude Include="..\third_party\mercury_ui\Controls\ESChildControlImageButton.h" />
+    <ClInclude Include="..\third_party\mercury_ui\Controls\ESChildControlInfo.h" />
+    <ClInclude Include="..\third_party\mercury_ui\Controls\ESChildControlLabel.h" />
+    <ClInclude Include="..\third_party\mercury_ui\Controls\ESChildControlList.h" />
+    <ClInclude Include="..\third_party\mercury_ui\Controls\ESChildControlPropertyGrid.h" />
+    <ClInclude Include="..\third_party\mercury_ui\Controls\ESChildControlTabCtrl.h" />
+    <ClInclude Include="..\third_party\mercury_ui\Controls\ESChildLookupBox.h" />
+    <ClInclude Include="..\third_party\mercury_ui\Controls\ESChildOpenColorDialogBox.h" />
+    <ClInclude Include="..\third_party\mercury_ui\Controls\ESChildOpenFileBox.h" />
+    <ClInclude Include="..\third_party\mercury_ui\Controls\ESChildOpenFontDialogBox.h" />
+    <ClInclude Include="..\third_party\mercury_ui\Controls\ESChildProgressCtrl.h" />
+    <ClInclude Include="..\third_party\mercury_ui\Controls\ESChildScrollBar.h" />
+    <ClInclude Include="..\third_party\mercury_ui\Controls\ESChildScrollView.h" />
+    <ClInclude Include="..\third_party\mercury_ui\Controls\ESChildSlider.h" />
+    <ClInclude Include="..\third_party\mercury_ui\Controls\ESChildTabView.h" />
+    <ClInclude Include="..\third_party\mercury_ui\Controls\ESChildTextBox.h" />
+    <ClInclude Include="..\third_party\mercury_ui\Controls\ESEasyMotion.h" />
+    <ClInclude Include="..\third_party\mercury_ui\Controls\ESEnumerableModifyDlg.h" />
+    <ClInclude Include="..\third_party\mercury_ui\Controls\ESEnumerableModifyWnd.h" />
+    <ClInclude Include="..\third_party\mercury_ui\Controls\ESFrameBase_Win.h" />
+    <ClInclude Include="..\third_party\mercury_ui\Controls\ESLocalizationMan.h" />
+    <ClInclude Include="..\third_party\mercury_ui\Controls\ESSerializableModifyDlg.h" />
+    <ClInclude Include="..\third_party\mercury_ui\Controls\ESSerializableModifyWnd.h" />
+    <ClInclude Include="..\third_party\mercury_ui\Controls\ESSimpleRenderView.h" />
+    <ClInclude Include="..\third_party\mercury_ui\Controls\MercuryBaseViewInfo.h" />
+    <ClInclude Include="..\third_party\mercury_ui\Controls\MercuryBaseWnd.h" />
+    <ClInclude Include="..\third_party\mercury_ui\Controls\MercuryGUI.h" />
+    <ClInclude Include="..\third_party\mercury_ui\Controls\MercuryLayerMan.h" />
+    <ClInclude Include="..\third_party\mercury_ui\Data\DataFieldCopier.h" />
+    <ClInclude Include="..\third_party\mercury_ui\Data\VRowSet.h" />
+    <ClInclude Include="..\third_party\mercury_ui\Path\Path.h" />
+    <ClInclude Include="..\third_party\mercury_ui\Serialize\EnumerableObject_IndexExtension.h" />
+    <ClInclude Include="..\third_party\mercury_ui\Serialize\Serializable.h" />
+    <ClInclude Include="..\third_party\mercury_ui\String\StringDecoder.h" />
+    <ClInclude Include="..\third_party\mercury_ui\Thread\WinThread.h" />
+    <ClInclude Include="..\third_party\mercury_ui\Utility\GrowableMemory.h" />
+    <ClInclude Include="..\third_party\mercury_ui\Utility\StringHelper.h" />
+    <ClInclude Include="..\third_party\mercury_ui\XML\Markup.h" />
+    <ClInclude Include="..\third_party\mercury_ui\_platformCompat\PlatformBufferedString.h" />
+    <ClInclude Include="..\third_party\mercury_ui\_platformCompat\PlatformCompat.h" />
+    <ClInclude Include="..\third_party\mercury_ui\_platformCompat\PlatformCompat_Win.h" />
+    <ClInclude Include="..\third_party\mercury_ui\_platformCompat\PlatformCriticalSection.h" />
+    <ClInclude Include="..\third_party\mercury_ui\_platformCompat\PlatformCriticalSection_Win.h" />
+    <ClInclude Include="..\third_party\mercury_ui\_platformCompat\PlatformDateTime.h" />
+    <ClInclude Include="..\third_party\mercury_ui\_platformCompat\PlatformDeviceContext.h" />
+    <ClInclude Include="..\third_party\mercury_ui\_platformCompat\PlatformDeviceContext_Skia.h" />
+    <ClInclude Include="..\third_party\mercury_ui\_platformCompat\PlatformEvent.h" />
+    <ClInclude Include="..\third_party\mercury_ui\_platformCompat\PlatformEvent_Win.h" />
+    <ClInclude Include="..\third_party\mercury_ui\_platformCompat\PlatformFont.h" />
+    <ClInclude Include="..\third_party\mercury_ui\_platformCompat\PlatformFont_Skia.h" />
+    <ClInclude Include="..\third_party\mercury_ui\_platformCompat\PlatformImage.h" />
+    <ClInclude Include="..\third_party\mercury_ui\_platformCompat\PlatformImage_Skia.h" />
+    <ClInclude Include="..\third_party\mercury_ui\_platformCompat\PlatformLongBinary.h" />
+    <ClInclude Include="..\third_party\mercury_ui\_platformCompat\PlatformPoint.h" />
+    <ClInclude Include="..\third_party\mercury_ui\_platformCompat\PlatformRect.h" />
+    <ClInclude Include="..\third_party\mercury_ui\_platformCompat\PlatformRect_Win.h" />
+    <ClInclude Include="..\third_party\mercury_ui\_platformCompat\PlatformRgn.h" />
+    <ClInclude Include="..\third_party\mercury_ui\_platformCompat\PlatformRgn_Win.h" />
+    <ClInclude Include="..\third_party\mercury_ui\_platformCompat\PlatformSize.h" />
+    <ClInclude Include="PokerLobbyDlg.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="SkiaTestProj.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\third_party\mercury_ui\Array\AutoSortedArray.cpp" />
+    <ClCompile Include="..\third_party\mercury_ui\Array\ChainTempl.cpp" />
+    <ClCompile Include="..\third_party\mercury_ui\Controls\ESChildAvatar.cpp" />
+    <ClCompile Include="..\third_party\mercury_ui\Controls\ESChildBanner.cpp" />
+    <ClCompile Include="..\third_party\mercury_ui\Controls\ESChildComboBox.cpp" />
+    <ClCompile Include="..\third_party\mercury_ui\Controls\ESChildComboListBox.cpp" />
+    <ClCompile Include="..\third_party\mercury_ui\Controls\ESChildControl.cpp" />
+    <ClCompile Include="..\third_party\mercury_ui\Controls\ESChildControlCheckBox.cpp" />
+    <ClCompile Include="..\third_party\mercury_ui\Controls\ESChildControlImage.cpp" />
+    <ClCompile Include="..\third_party\mercury_ui\Controls\ESChildControlImageButton.cpp" />
+    <ClCompile Include="..\third_party\mercury_ui\Controls\ESChildControlInfo.cpp" />
+    <ClCompile Include="..\third_party\mercury_ui\Controls\ESChildControlLabel.cpp" />
+    <ClCompile Include="..\third_party\mercury_ui\Controls\ESChildControlList.cpp" />
+    <ClCompile Include="..\third_party\mercury_ui\Controls\ESChildControlPropertyGrid.cpp" />
+    <ClCompile Include="..\third_party\mercury_ui\Controls\ESChildControlTabCtrl.cpp" />
+    <ClCompile Include="..\third_party\mercury_ui\Controls\ESChildLookupBox.cpp" />
+    <ClCompile Include="..\third_party\mercury_ui\Controls\ESChildOpenColorDialogBox.cpp" />
+    <ClCompile Include="..\third_party\mercury_ui\Controls\ESChildOpenFileBox.cpp" />
+    <ClCompile Include="..\third_party\mercury_ui\Controls\ESChildOpenFontDialogBox.cpp" />
+    <ClCompile Include="..\third_party\mercury_ui\Controls\ESChildProgressCtrl.cpp" />
+    <ClCompile Include="..\third_party\mercury_ui\Controls\ESChildScrollBar.cpp" />
+    <ClCompile Include="..\third_party\mercury_ui\Controls\ESChildScrollView.cpp" />
+    <ClCompile Include="..\third_party\mercury_ui\Controls\ESChildSlider.cpp" />
+    <ClCompile Include="..\third_party\mercury_ui\Controls\ESChildTabView.cpp" />
+    <ClCompile Include="..\third_party\mercury_ui\Controls\ESChildTextBox.cpp" />
+    <ClCompile Include="..\third_party\mercury_ui\Controls\ESEasyMotion.cpp" />
+    <ClCompile Include="..\third_party\mercury_ui\Controls\ESEnumerableModifyDlg.cpp" />
+    <ClCompile Include="..\third_party\mercury_ui\Controls\ESEnumerableModifyWnd.cpp" />
+    <ClCompile Include="..\third_party\mercury_ui\Controls\ESFrameBase_Win.cpp" />
+    <ClCompile Include="..\third_party\mercury_ui\Controls\ESLocalizationMan.cpp" />
+    <ClCompile Include="..\third_party\mercury_ui\Controls\ESSerializableModifyDlg.cpp" />
+    <ClCompile Include="..\third_party\mercury_ui\Controls\ESSerializableModifyWnd.cpp" />
+    <ClCompile Include="..\third_party\mercury_ui\Controls\ESSimpleRenderView.cpp" />
+    <ClCompile Include="..\third_party\mercury_ui\Controls\MercuryBaseViewInfo.cpp" />
+    <ClCompile Include="..\third_party\mercury_ui\Controls\MercuryBaseWnd.cpp" />
+    <ClCompile Include="..\third_party\mercury_ui\Controls\MercuryBaseWnd_Designer.cpp" />
+    <ClCompile Include="..\third_party\mercury_ui\Controls\MercuryGUI.cpp" />
+    <ClCompile Include="..\third_party\mercury_ui\Controls\MercuryLayerMan.cpp" />
+    <ClCompile Include="..\third_party\mercury_ui\Data\DataFieldCopier.cpp" />
+    <ClCompile Include="..\third_party\mercury_ui\Data\VRowSet.cpp" />
+    <ClCompile Include="..\third_party\mercury_ui\Data\VRowSetDataConvertion.cpp" />
+    <ClCompile Include="..\third_party\mercury_ui\Path\Path.cpp" />
+    <ClCompile Include="..\third_party\mercury_ui\Serialize\EnumerableObject_IndexExtension.cpp" />
+    <ClCompile Include="..\third_party\mercury_ui\Serialize\Serializable.cpp" />
+    <ClCompile Include="..\third_party\mercury_ui\Serialize\Serializable_SourceCodeGenerate.cpp" />
+    <ClCompile Include="..\third_party\mercury_ui\String\StringDecoder.cpp" />
+    <ClCompile Include="..\third_party\mercury_ui\Thread\WinThread.cpp" />
+    <ClCompile Include="..\third_party\mercury_ui\Utility\GrowableMemory.cpp" />
+    <ClCompile Include="..\third_party\mercury_ui\Utility\StringHelper.cpp" />
+    <ClCompile Include="..\third_party\mercury_ui\XML\Markup.cpp" />
+    <ClCompile Include="..\third_party\mercury_ui\_platformCompat\PlatformBufferedString.cpp" />
+    <ClCompile Include="..\third_party\mercury_ui\_platformCompat\PlatformCompat_Win.cpp" />
+    <ClCompile Include="..\third_party\mercury_ui\_platformCompat\PlatformCriticalSection_Win.cpp" />
+    <ClCompile Include="..\third_party\mercury_ui\_platformCompat\PlatformDateTime.cpp" />
+    <ClCompile Include="..\third_party\mercury_ui\_platformCompat\PlatformDeviceContext_Skia.cpp" />
+    <ClCompile Include="..\third_party\mercury_ui\_platformCompat\PlatformEvent_Win.cpp" />
+    <ClCompile Include="..\third_party\mercury_ui\_platformCompat\PlatformFont_Skia.cpp" />
+    <ClCompile Include="..\third_party\mercury_ui\_platformCompat\PlatformImage_Skia.cpp" />
+    <ClCompile Include="..\third_party\mercury_ui\_platformCompat\PlatformLongBinary.cpp" />
+    <ClCompile Include="..\third_party\mercury_ui\_platformCompat\PlatformRect_Win.cpp" />
+    <ClCompile Include="..\third_party\mercury_ui\_platformCompat\PlatformRgn_Win.cpp" />
+    <ClCompile Include="PokerLobbyDlg.cpp" />
+    <ClCompile Include="SkiaTestProj.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="SkiaTestProj.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="SkiaTestProj.ico" />
+    <Image Include="small.ico" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

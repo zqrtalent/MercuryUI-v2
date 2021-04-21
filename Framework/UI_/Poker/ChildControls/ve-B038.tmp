@@ -1,0 +1,188 @@
+// ESChildControlTabView.cpp : implementation file
+//
+
+#include "stdafx.h"
+#include "..\..\..\Image\ImageHelper.h"
+#include "..\PokerGUI.h"
+#include "ESChildControlTabView.h"
+
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+// ESChildControlTabView
+
+ESChildControlTabView::ESChildControlTabView(){
+	ESTabViewItem* pItem = new ESTabViewItem();
+	pItem->sTitle	= _T("Chat");
+	pItem->nData	= 0;
+	m_listTabItems.Add(pItem);
+	m_listTabItems.Add(pItem);
+	}
+
+ESChildControlTabView::~ESChildControlTabView(){
+	}
+
+bool
+ESChildControlTabView::Create(int nId, CRect rcRect, MercuryBaseView* pOwner, ESChildControl* pParent){
+	ESChildControl::Create(nId, rcRect, pOwner, pParent);
+	return true;
+	}
+
+bool
+ESChildControlTabView::SetPos(int x, int y, bool bRedraw){
+	ESChildControl::SetPos(x, y, bRedraw);
+	return true;
+	}
+
+bool
+ESChildControlTabView::SetSize(int cx, int cy, bool bRedraw){
+	ESChildControl::SetSize(cx, cy, bRedraw);
+	return true;
+	}
+
+bool
+ESChildControlTabView::Destroy(){
+	ESChildControl::Destroy();
+	return true;
+	}
+
+// ========================================================
+//
+//	Event methods.
+//
+// ========================================================
+
+void
+ESChildControlTabView::OnPaintClient(CDC* pDC, CRect* pRectDC, CRect* pRectClient){
+	PokerGUI*	pGUI	= PokerGUI::GetInstance();
+	int nItemCt			= m_listTabItems.GetCount();
+	int nItem			= 0;
+	int nBorderWidth	= 1;
+	int nItemWidth		= (m_rcRect.Width() - (nItemCt + 1)*nBorderWidth) / nItemCt;
+	int nItemHeight		= pGUI->m_nTabViewItemCY;
+
+	CImage*	pImage		= NULL;
+	CImage*	pItemActive	= pGUI->m_pTabViewItemActive;
+	CImage*	pItemDefault= pGUI->m_pTabViewItemDefault;
+	if( !pItemActive || !pItemDefault ) return;
+
+	CRect	rcTabViewDC, rcInvalid;
+	rcTabViewDC.left	= (m_rcRect.left - pRectClient->left) + pRectDC->left; 
+	rcTabViewDC.top		= (m_rcRect.top - pRectClient->top) + pRectDC->top; 
+	rcTabViewDC.right	= rcTabViewDC.left + m_rcRect.Width(); 
+	rcTabViewDC.bottom	= rcTabViewDC.top + m_rcRect.Height(); 
+
+	// Draw round border. {{
+	CPen	penBorder(PS_SOLID, nBorderWidth, pGUI->m_crTabViewBorder);
+	CPen*	pPenOld	= pDC->SelectObject(&penBorder);
+	pDC->MoveTo(rcTabViewDC.left, rcTabViewDC.top);
+	pDC->LineTo(rcTabViewDC.right, rcTabViewDC.top);
+	pDC->LineTo(rcTabViewDC.right, rcTabViewDC.bottom);
+	pDC->LineTo(rcTabViewDC.left, rcTabViewDC.bottom);
+	pDC->LineTo(rcTabViewDC.left, rcTabViewDC.top);
+	// }}
+
+	int nOffsetX = rcTabViewDC.left + nBorderWidth;
+	while( nItem < nItemCt ){
+		CRect rcTabItemDC;
+		rcTabItemDC.left	= nOffsetX;
+		rcTabItemDC.top		= rcTabViewDC.top + 1;
+		rcTabItemDC.right	= rcTabItemDC.left + nItemWidth;
+		rcTabItemDC.bottom	= rcTabItemDC.top + nItemHeight;
+
+		if( nItem == (nItemCt - 1) ){
+			rcTabItemDC.left = rcTabViewDC.right - nBorderWidth;
+			}
+
+		// Draw tabview item. {{
+		pImage		= pItemDefault;
+		rcInvalid	= rcTabItemDC & *pRectDC;
+		if( pImage && !rcInvalid.IsRectEmpty() )
+			PokerGUI::RenderImage(pDC, rcInvalid, rcTabItemDC, pImage);
+		// }}
+
+		// Draw border. {{
+		pDC->MoveTo(rcTabItemDC.right, rcTabItemDC.top);
+		pDC->LineTo(rcTabItemDC.right, rcTabItemDC.bottom);
+		// }}
+
+		nOffsetX	+= (nItemWidth + nBorderWidth);
+		nItem		++;
+		}
+
+	pDC->SelectObject(pPenOld);
+
+
+	//pDC->FillSolidRect(*pRectDC, RGB(0, 0, 111));
+
+	/*
+	PokerGUI*	pGUI	= PokerGUI::GetInstance();
+	CImage*		pImage	= pGUI->m_pDealerBtnImg;
+	if( !pImage ) return;
+
+	CRect	rcDealerBtnDC, rcInvalid;
+	rcDealerBtnDC.left		= (m_rcRect.left - pRectClient->left) + pRectDC->left; 
+	rcDealerBtnDC.top		= (m_rcRect.top - pRectClient->top) + pRectDC->top; 
+	rcDealerBtnDC.right		= rcDealerBtnDC.left + m_rcRect.Width(); 
+	rcDealerBtnDC.bottom	= rcDealerBtnDC.top + m_rcRect.Height(); 
+
+	// Draw button background. {{
+	rcInvalid	= rcDealerBtnDC & *pRectDC;
+	if( pImage && !rcInvalid.IsRectEmpty() )
+		PokerGUI::RenderImage(pDC, rcInvalid, rcDealerBtnDC, pImage);
+	// }}
+	*/
+	}
+
+void	
+ESChildControlTabView::OnMouseHover(CPoint pt, UINT nFlags){
+	}
+
+BOOL	
+ESChildControlTabView::OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message){
+	return 0;
+	}
+
+void	
+ESChildControlTabView::OnMouseLeave(UINT nFlags){
+	}
+
+void	
+ESChildControlTabView::OnMouseEnter(UINT nFlags){
+	}
+
+void
+ESChildControlTabView::OnLButtonDown(CPoint pt, UINT nFlags){
+	}
+
+void
+ESChildControlTabView::OnLButtonUp(CPoint pt, UINT nFlags){
+	}
+
+void	
+ESChildControlTabView::OnLButtonClick(CPoint pt, UINT nFlags){
+	}
+
+void	
+ESChildControlTabView::OnRButtonClick(CPoint pt, UINT nFlags){
+	}
+
+void	
+ESChildControlTabView::OnMButtonClick(CPoint pt, UINT nFlags){
+	}
+
+void	
+ESChildControlTabView::OnLButtonDblClick(CPoint pt, UINT nFlags){
+	}
+
+void	
+ESChildControlTabView::OnRButtonDblClick(CPoint pt, UINT nFlags){
+	}
+
+void	
+ESChildControlTabView::OnMButtonDblClick(CPoint pt, UINT nFlags){
+	}

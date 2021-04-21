@@ -1,0 +1,425 @@
+// ESChildControlList.cpp : implementation file
+//
+
+#include "stdafx.h"
+#include "..\..\..\Image\ImageHelper.h"
+#include "..\..\..\Controls\MercuryGUI.h"
+#include "..\PokerGUI.h"
+#include "ESChildControlList.h"
+
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+// ESChildControlList
+
+ESChildControlList::ESChildControlList(){
+	m_pRowSet			= NULL;
+	m_crBorder			= RGB(102, 102, 102);
+	m_crHeader			= RGB(202, 202, 202);
+	m_crView			= RGB(255, 255, 255);
+	m_crRow1			= RGB(212, 223, 232);
+	m_crRow2			= RGB(255, 255, 255);
+	m_nScrollBarCXCY	= 15;
+	m_nBorderWidth		= 1;
+	m_nItemCY			= 22;
+	m_nSelectedRow		= 3;
+
+	m_bUnderColSizing	= false;
+	m_bColumnSizing		= false;
+	m_nColumnSizing		= -1;
+
+	m_crSelectedRow		= RGB(75, 150, 230);
+	m_crSelectedRowText	= RGB(255, 255, 255);
+	m_crDefaultRowText	= RGB(0, 0, 0);
+
+	m_nLeftCol			= 0;
+	m_nLeftColOffset	= 30;
+	m_nTopRow			= 0;
+	m_nTopRowOffset		= 10;
+
+	MercuryGUI*	pMercuryGUI	= MercuryGUI::GetInstance();
+	m_nHeaderCY			= pMercuryGUI->header.m_nHeight;
+	m_pHdrItemDefault	= &pMercuryGUI->header.m_imageItem_normal;
+	m_pHdrItemSelected	= &pMercuryGUI->header.m_imageItem_sel;
+	m_pHdrItemDivider	= &pMercuryGUI->header.m_imageItemDiv_sel;
+	// ==========================
+
+	m_pRowSet			= new VirtualRowSet();
+	m_pRowSet->AddFieldEx(_T("FIELD1"), FieldType::FTChar, 64);
+	m_pRowSet->AddFieldEx(_T("FIELD2"), FieldType::FTChar, 64);
+	m_pRowSet->AddFieldEx(_T("FIELD3"), FieldType::FTChar, 64);
+	m_pRowSet->AddFieldEx(_T("FIELD4"), FieldType::FTChar, 64);
+	m_pRowSet->AddFieldEx(_T("FIELD5"), FieldType::FTChar, 64);
+	m_pRowSet->AddFieldEx(_T("FIELD6"), FieldType::FTChar, 64);
+	m_pRowSet->AddFieldEx(_T("FIELD7"), FieldType::FTChar, 64);
+	m_pRowSet->AddFieldEx(_T("FIELD8"), FieldType::FTChar, 64);
+	m_pRowSet->AddFieldEx(_T("FIELD9"), FieldType::FTChar, 64);
+	m_pRowSet->AddFieldEx(_T("FIELD10"), FieldType::FTChar, 64);
+	m_pRowSet->AddFieldEx(_T("FIELD11"), FieldType::FTChar, 64);
+	m_pRowSet->AddFieldEx(_T("FIELD12"), FieldType::FTChar, 64);
+	m_pRowSet->AddFieldEx(_T("FIELD13"), FieldType::FTChar, 64);
+	m_pRowSet->AddFieldEx(_T("FIELD14"), FieldType::FTChar, 64);
+	m_pRowSet->Create();
+
+
+	int nLoop = 0;
+	while( nLoop < 1000 ){
+		if( m_pRowSet->AddRow() ){
+			m_pRowSet->SetString(_T("FIELD1"), _T("Testament"));
+			m_pRowSet->SetString(_T("FIELD3"), _T("Testament"));
+			m_pRowSet->SetString(_T("FIELD5"), _T("Testament"));
+			m_pRowSet->SetString(_T("FIELD7"), _T("Testament"));
+			m_pRowSet->SetString(_T("FIELD9"), _T("Testament"));
+			m_pRowSet->SetString(_T("FIELD11"), _T("Testament"));
+			m_pRowSet->SetString(_T("FIELD13"), _T("Testament"));
+			}
+		nLoop ++;
+		}
+
+	AddColumn(_T("FIELD1"), _T("Column1"), 0, 80, 40);
+	AddColumn(_T("FIELD2"), _T("Column2"), 0, 80, 40);
+	AddColumn(_T("FIELD3"), _T("Column3"), 0, 80, 40);
+	AddColumn(_T("FIELD4"), _T("Column4"), 0, 80, 40);
+	AddColumn(_T("FIELD5"), _T("Column5"), 0, 80, 40);
+	AddColumn(_T("FIELD6"), _T("Column6"), 0, 80, 40);
+	AddColumn(_T("FIELD7"), _T("Column7"), 0, 80, 40);
+	AddColumn(_T("FIELD8"), _T("Column8"), 0, 80, 40);
+	AddColumn(_T("FIELD9"), _T("Column9"), 0, 80, 40);
+	AddColumn(_T("FIELD10"), _T("Column10"), 0, 80, 40);
+	AddColumn(_T("FIELD11"), _T("Column11"), 0, 80, 40);
+	AddColumn(_T("FIELD12"), _T("Column12"), 0, 80, 40);
+	AddColumn(_T("FIELD13"), _T("Column13"), 0, 80, 40);
+	AddColumn(_T("FIELD14"), _T("Column14"), 0, 80, 40);
+
+	// ==========================
+	}
+
+ESChildControlList::~ESChildControlList(){
+	if( m_pRowSet ){
+		delete m_pRowSet;
+		m_pRowSet = NULL;
+		}
+	}
+
+bool
+ESChildControlList::Create(int nId, CRect rcRect, MercuryBaseView* pOwner, ESChildControl* pParent){
+	bool bRet = ESChildControl::Create(nId, rcRect, pOwner, pParent);
+	return bRet;
+	}
+
+bool
+ESChildControlList::SetPos(int x, int y, bool bRedraw){
+	ESChildControl::SetPos(x, y, bRedraw);
+	return true;
+	}
+
+bool
+ESChildControlList::SetSize(int cx, int cy, bool bRedraw){
+	ESChildControl::SetSize(cx, cy, bRedraw);
+	return true;
+	}
+
+void
+ESChildControlList::SetLogicalPos(float fPosX, float fPosY){
+	ESChildControl::SetLogicalPos(fPosX, fPosY);
+	}
+
+void
+ESChildControlList::SetLogicalSize(float fCX, float fCY){
+	ESChildControl::SetLogicalSize(fCX, fCY);
+	}
+
+void
+ESChildControlList::OwnerWindowSizeChanged(int cx, int cy){
+	ESChildControl::OwnerWindowSizeChanged(cx, cy);
+	}
+
+bool
+ESChildControlList::Destroy(){
+	ESChildControl::Destroy();
+	return true;
+	}
+
+void
+ESChildControlList::OnPaintClient(CDC* pDC, CRect* pRectDC, CRect* pRectClient){
+	CRect	rcListDC;
+	rcListDC.left		= (m_rcRect.left - pRectClient->left) + pRectDC->left; 
+	rcListDC.top		= (m_rcRect.top - pRectClient->top) + pRectDC->top; 
+	rcListDC.right		= rcListDC.left + m_rcRect.Width(); 
+	rcListDC.bottom		= rcListDC.top + m_rcRect.Height(); 
+
+	// Draw round border. {{
+	CPen	penBorder(PS_SOLID, m_nBorderWidth, m_crBorder);
+	CPen*	pPenOld	= pDC->SelectObject(&penBorder);
+	pDC->MoveTo(rcListDC.left, rcListDC.top);
+	pDC->LineTo(rcListDC.right, rcListDC.top);
+	pDC->LineTo(rcListDC.right, rcListDC.bottom);
+	pDC->LineTo(rcListDC.left, rcListDC.bottom);
+	pDC->LineTo(rcListDC.left, rcListDC.top);
+	pDC->SelectObject(pPenOld);
+	// }}
+
+	DrawVScrollBar	(pDC, pRectDC, pRectClient);
+	DrawHScrollBar	(pDC, pRectDC, pRectClient);
+	DrawView		(pDC, pRectDC, pRectClient);
+	DrawHeader		(pDC, pRectDC, pRectClient);
+	}
+
+void
+ESChildControlList::DrawVScrollBar(CDC* pDC, CRect* pRectDC, CRect* pRectClient){
+
+	}
+
+void
+ESChildControlList::DrawHScrollBar(CDC* pDC, CRect* pRectDC, CRect* pRectClient){
+	}
+
+void
+ESChildControlList::DrawView(CDC* pDC, CRect* pRectDC, CRect* pRectClient){
+	CRect	rcView, rcInvalid;
+	rcView.left			= m_rcRect.left + m_nBorderWidth; 
+	rcView.top			= m_rcRect.top + m_nHeaderCY + m_nBorderWidth; 
+	rcView.right		= m_rcRect.right - m_nBorderWidth; 
+	rcView.bottom		= m_rcRect.bottom - m_nBorderWidth; 
+
+	PokerGUI*	pGUI	= PokerGUI::GetInstance();
+	CSize		szText;
+
+	CRect	rcViewDC;
+	rcViewDC.left		= (rcView.left - pRectClient->left) + pRectDC->left; 
+	rcViewDC.top		= (rcView.top - pRectClient->top) + pRectDC->top; 
+	rcViewDC.right		= rcViewDC.left + rcView.Width(); 
+	rcViewDC.bottom		= rcViewDC.top + rcView.Height(); 
+
+	int	nLoop			= m_nTopRow;
+	int nCt				= m_pRowSet->GetRowCount();
+	int nWidth			= 0;
+	int nOffsetY		= (rcViewDC.top - m_nTopRowOffset);
+	int nOffsetX		= (rcViewDC.left - m_nLeftColOffset);
+
+	CBrush brush1(m_crRow1);
+	CBrush brush2(m_crRow2);
+	CBrush brush3(m_crSelectedRow);
+	CBrush* pBrush[]		= {&brush1, &brush2};
+
+	while( nLoop < nCt ){
+		CRect rcItemDC;
+		rcItemDC.left		= nOffsetX;
+		rcItemDC.top		= nOffsetY;
+		rcItemDC.right		= rcViewDC.right;
+		rcItemDC.bottom		= min(rcItemDC.top + m_nItemCY, rcViewDC.bottom);
+		m_pRowSet->SetCurrentRow(nLoop);
+
+		if( nOffsetY >= rcViewDC.bottom )
+			break;
+
+		rcInvalid = rcItemDC & *pRectDC;
+		if( rcInvalid.IsRectEmpty() ){
+			nOffsetY	+= m_nItemCY;
+			nLoop ++;
+			continue;
+			}
+
+		// Fill row with color.
+		if( nLoop == m_nSelectedRow )
+			pDC->FillRect(rcInvalid, &brush3);
+		else
+			pDC->FillRect(rcInvalid, pBrush[(nLoop - m_nTopRow) % 2]);
+
+		// Render row cell. {{
+		int nItem	= m_nLeftCol;
+		int nItemCt	= m_listHeaderItems.GetCount();
+
+		CRect rcCellDC;		
+		rcCellDC.left	= nOffsetX;
+		rcCellDC.top	= rcItemDC.top;
+		rcCellDC.bottom	= rcItemDC.bottom;
+
+		CFont* pFontOld = pDC->SelectObject(pGUI->m_pLobbyTabFont);
+		pDC->SetBkMode		(TRANSPARENT);
+		pDC->SetTextColor	((nLoop == m_nSelectedRow) ? m_crSelectedRowText : m_crDefaultRowText);
+
+		CString sItem;
+		while( nItem < nItemCt ){
+			ESChildListHeaderItem* pItem = m_listHeaderItems.GetAt(nItem);
+			if( !pItem ){
+				nItem ++;
+				break;
+				}
+
+			rcCellDC.right		= min(rcCellDC.left + pItem->nWidth, rcItemDC.right);
+			m_pRowSet->GetString(pItem->sField.GetBuffer(), sItem);
+
+			// Draw item label. {{
+			ImgHlp::GetTextSize	(&sItem, pGUI->m_pLobbyTabFont, szText);
+			CPoint ptLabel		(max(rcCellDC.left, rcViewDC.left) + 3, rcCellDC.top + (rcCellDC.Height() - szText.cy)/2);
+			pDC->ExtTextOut		(ptLabel.x, ptLabel.y, ETO_CLIPPED, rcCellDC, sItem.GetBuffer(), NULL);
+			// }}
+
+			rcCellDC.left += pItem->nWidth;
+			nItem ++;
+			}
+
+		pDC->SelectObject	(pFontOld);
+		// }}
+
+		nOffsetY	+= m_nItemCY;
+		nLoop ++;
+		}
+	}
+
+void
+ESChildControlList::DrawHeader(CDC* pDC, CRect* pRectDC, CRect* pRectClient){
+	CRect	rcHeader, rcInvalid;
+	rcHeader.left		= m_rcRect.left + m_nBorderWidth; 
+	rcHeader.top		= m_rcRect.top + m_nBorderWidth; 
+	rcHeader.right		= m_rcRect.right - m_nBorderWidth; 
+	rcHeader.bottom		= rcHeader.top + m_nHeaderCY; 
+
+	PokerGUI*	pGUI	= PokerGUI::GetInstance();
+	CSize		szText;
+
+	CRect	rcHeaderDC;
+	rcHeaderDC.left		= (rcHeader.left - pRectClient->left) + pRectDC->left; 
+	rcHeaderDC.top		= (rcHeader.top - pRectClient->top) + pRectDC->top; 
+	rcHeaderDC.right	= rcHeaderDC.left + rcHeader.Width(); 
+	rcHeaderDC.bottom	= rcHeaderDC.top + rcHeader.Height(); 
+
+	int	nLoop			= m_nLeftCol;
+	int nCt				= m_listHeaderItems.GetCount();
+	int nWidth			= 0;
+	int nOffset			= (rcHeaderDC.left - m_nLeftColOffset);
+	int	nWidthDiv		= m_pHdrItemDivider->GetWidth();
+	bool bActive		= false;
+
+	while( nLoop < nCt ){
+		ESChildListHeaderItem* pItem = m_listHeaderItems.GetAt(nLoop);
+		if( !pItem ){
+			nLoop ++;
+			continue;
+			}
+
+		if( nOffset >= rcHeaderDC.right  )
+			break;
+
+		CRect rcItemDC;
+		rcItemDC.left		= nOffset;
+		rcItemDC.top		= rcHeaderDC.top;
+		rcItemDC.right		= min(rcItemDC.left + pItem->nWidth - nWidthDiv, rcHeaderDC.right);
+		rcItemDC.bottom		= rcHeaderDC.bottom;
+
+		rcInvalid = rcItemDC & *pRectDC;
+		if( !rcInvalid.IsRectEmpty() ){
+			PokerGUI::RenderImage(pDC, rcInvalid, rcItemDC, m_pHdrItemDefault, false);
+			}
+
+		// Draw item label. {{
+		CFont* pFontOld = pDC->SelectObject(pGUI->m_pLobbyTabFont);
+		ImgHlp::GetTextSize(&pItem->sTitle, pGUI->m_pLobbyTabFont, szText);
+
+//		CPoint ptLabel		(rcItemDC.left + (rcItemDC.Width() - szText.cx)/2, rcItemDC.top + (rcItemDC.Height() - szText.cy)/2);
+		CPoint ptLabel		(max(rcItemDC.left, rcHeaderDC.left) + 3, rcItemDC.top + (rcItemDC.Height() - szText.cy)/2);
+		pDC->SetBkMode		(TRANSPARENT);
+		pDC->SetTextColor	(RGB(0, 0, 0));
+		pDC->ExtTextOut		(ptLabel.x, ptLabel.y, ETO_CLIPPED, rcItemDC, pItem->sTitle.GetBuffer(), NULL);
+		pDC->SelectObject	(pFontOld);
+		// }}
+
+		CRect rcItemDividerDC;
+		rcItemDividerDC.left		= rcItemDC.right;
+		rcItemDividerDC.top			= rcItemDC.top;
+		rcItemDividerDC.right		= rcItemDC.right + nWidthDiv;
+		rcItemDividerDC.bottom		= rcItemDC.bottom;
+
+		rcInvalid = rcItemDividerDC & *pRectDC;
+		if( !rcInvalid.IsRectEmpty() ){
+			PokerGUI::RenderImage(pDC, rcInvalid, rcItemDividerDC, m_pHdrItemDivider, false);
+			}
+		nOffset		+= pItem->nWidth;
+		nLoop		++;
+		}
+
+	rcHeaderDC.left	= nOffset;
+	rcInvalid		= rcHeaderDC & *pRectDC;
+	if( !rcInvalid.IsRectEmpty() ){
+		PokerGUI::RenderImage(pDC, rcInvalid, rcHeaderDC, m_pHdrItemDefault, false);
+		}
+	}
+
+
+void	
+ESChildControlList::OnMouseHover(CPoint pt, UINT nFlags){
+
+
+
+	}
+
+BOOL	
+ESChildControlList::OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message){
+	SetCursor(LoadCursor(NULL, IDC_HAND));
+	return 1;
+	}
+
+void	
+ESChildControlList::OnMouseLeave(UINT nFlags){
+	}
+
+void	
+ESChildControlList::OnMouseEnter(UINT nFlags){
+	}
+
+void
+ESChildControlList::OnLButtonDown(CPoint pt, UINT nFlags){
+	}
+
+void
+ESChildControlList::OnLButtonUp(CPoint pt, UINT nFlags){
+	}
+
+void	
+ESChildControlList::OnLButtonClick(CPoint pt, UINT nFlags){
+	}
+
+void	
+ESChildControlList::OnRButtonClick(CPoint pt, UINT nFlags){
+	}
+
+void	
+ESChildControlList::OnMButtonClick(CPoint pt, UINT nFlags){
+	}
+
+void	
+ESChildControlList::OnLButtonDblClick(CPoint pt, UINT nFlags){
+	OnLButtonDown(pt, nFlags);
+	}
+
+void	
+ESChildControlList::OnRButtonDblClick(CPoint pt, UINT nFlags){
+	}
+
+void	
+ESChildControlList::OnMButtonDblClick(CPoint pt, UINT nFlags){
+	}
+
+bool
+ESChildControlList::AddColumn(const CString sField, const CString sTitle, int nAlign, int nWidth, int nWidthMin){
+	ESChildListHeaderItem* pItem = new ESChildListHeaderItem();
+	pItem->sTitle				= sTitle;
+	pItem->sField				= sField;
+	pItem->nAlign				= nAlign;
+	pItem->nWidth				= nWidth;
+	pItem->nMinWidth			= nWidthMin;
+	m_listHeaderItems.Add(pItem);
+	return true;
+	}
+
+int
+ESChildControlList::GetColumnByPoint(CPoint pt, bool& bOverSizing){
+
+
+
+	}
