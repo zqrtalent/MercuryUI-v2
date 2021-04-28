@@ -9,6 +9,15 @@
 #import "NSWindowFrame.h"
 #import "NSWindowFrameView.h"
 
+@interface NSWindowFrame()
+{
+    _Font _selectedFont;
+    void* _fontChangeCallbackData;
+    std::function<void(void*,_Font*)> _fontChangeCallback;
+}
+
+@end
+
 @implementation NSWindowFrame
 
 -(id)initWithContentRect:(NSRect)contentRect styleMask:(NSUInteger)aStyle backing:(NSBackingStoreType)bufferingType defer:(BOOL)flag
@@ -72,7 +81,7 @@
 {
     [super scrollWheel:theEvent];
     
-    NSLog(@"scroll wheel");
+    NSLog(@"scroll wheel x=%f y=%f z=%f", theEvent.deltaX, theEvent.deltaY, theEvent.deltaZ);
 }
 
 -(void)magnifyWithEvent:(NSEvent*)theEvent
@@ -102,6 +111,32 @@
 -(BOOL)windowShouldClose:(id)sender
 {
     return YES;
+}
+
+-(void) chooseFont:(_Font*)selectedFont withCallback:(std::function<void(void*,_Font*)>)callback andData:(void*)data
+{
+    _selectedFont.DeleteObject();
+    selectedFont->CopyFont(&_selectedFont);
+    _fontChangeCallbackData = data;
+    _fontChangeCallback = callback;
+    
+    NSFontManager* fontMgr = [NSFontManager sharedFontManager];
+    [fontMgr setTarget: self];
+    [fontMgr setAction:@selector(changeMyCustomFont:)];
+    
+    auto fontPanel = [NSFontPanel sharedFontPanel];
+    [fontPanel setPanelFont:_selectedFont isMultiple: NO];
+    [fontPanel setWorksWhenModal: YES];
+    [fontPanel makeKeyAndOrderFront:nil];
+    fontPanel.enabled = YES;
+}
+
+-(void) changeMyCustomFont:(NSFontManager*)sender
+{
+    auto font = _selectedFont.Detach();
+    _selectedFont.Attach([sender convertFont: font]);
+    NSLog(@"New font: %@", (NSFont*)_selectedFont);
+    _fontChangeCallback(_fontChangeCallbackData, &_selectedFont);
 }
 
 @end

@@ -87,7 +87,8 @@ ESChildOpenFontDialogBox::OnLButtonDown(_Point pt, UINT nFlags){
 		else
 			pLogFontInitial = NULL;
 		}
-	/*
+    
+#ifdef _WINDOWS
 	CFontDialog fontDialog(pLogFontInitial); 
 	if( fontDialog.DoModal() == IDOK ){
 		if( fontDialog.m_cf.lpLogFont && fontDialog.m_cf.lpLogFont->lfFaceName[0] != '\0' ){
@@ -100,8 +101,21 @@ ESChildOpenFontDialogBox::OnLButtonDown(_Point pt, UINT nFlags){
 			SetText		(_string(m_lfChosen.lfFaceName), false, true);
 			delete pFontNew;
 			}
-		}*/
+		}
+#elif __APPLE__
+    auto windowFrame = (NSWindowFrame*)[GetOwner()->GetHWND() window];
+    [windowFrame chooseFont:&m_textFont withCallback:ESChildOpenFontDialogBox::NSFontPanel_OnFontChanged andData: this];
+#endif
 	}
+
+#ifdef __APPLE__
+void
+ESChildOpenFontDialogBox::NSFontPanel_OnFontChanged(void* pThis, _Font* newFont){
+    auto pThis_ = (ESChildOpenFontDialogBox*)pThis;
+    newFont->GetLogFont(&pThis_->m_lfChosen);
+    pThis_->SetFont(newFont, true);
+}
+#endif
 
 void
 ESChildOpenFontDialogBox::OnLButtonUp(_Point pt, UINT nFlags){

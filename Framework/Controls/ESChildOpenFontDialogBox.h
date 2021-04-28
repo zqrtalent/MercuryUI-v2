@@ -31,6 +31,11 @@ protected:
 
 protected:
 	LOGFONT		m_lfChosen;
+    
+private:
+#ifdef __APPLE__
+    static void NSFontPanel_OnFontChanged(void* pThis, _Font* newFont);
+#endif
 
 	// Control events.
 protected:

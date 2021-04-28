@@ -785,9 +785,8 @@ MercuryBaseView::OnCommandProperties(){
     if(m_propertyDlg == nullptr){
         m_propertyDlg = new ESSerializableModifyDlg();
         m_propertyDlg->Create();
-        
     }
-    else{
+    else{ // TODO: investigate to re-use existing dialog and potential memory leak issue!
         m_propertyDlg = new ESSerializableModifyDlg();
         m_propertyDlg->Create();
     }

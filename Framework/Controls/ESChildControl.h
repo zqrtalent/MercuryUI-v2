@@ -91,7 +91,10 @@ public:
 	bool			IsVisible					(){return m_bVisible;};
 	void			SetVisible					(bool bVisible, bool bRedraw, bool bRememberRestoreHiddenChilds = false);
 	bool			IsMouseEventsAllowed		(){return m_bAllowMouseEvents;};
-	void			AllowMouseEvents			(bool bAllow){m_bAllowMouseEvents = bAllow;}
+	void			AllowMouseEvents			(bool bAllow){
+        m_bAllowMouseEvents = bAllow;
+        
+    }
 
 	bool			IsDesignerMode				(){return (m_pOwner ? m_pOwner->IsDesignerMode() : false);};
 
@@ -268,7 +271,7 @@ protected:
 	bool							m_bModal;					// Indicates modal child control.
 
 	bool							m_bAllowMouseEvents;		// Mouse events allowed.
-
+    
 	_Rect							m_rcFixedPosition;			// Fixed position of lef, top, right and bottom sides depending on parent control.
 	// Relative controls.
 	ESChildControl*					m_pTopRelativeControl;		

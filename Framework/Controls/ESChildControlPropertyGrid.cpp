@@ -366,7 +366,7 @@ ESPropertyGridItem*
 ESChildControlPropertyGrid::GetNextVisibleItem(ESPropertyGridItem* pItem, int& nParentCt){
 	if( !pItem ) return NULL;
 
-	if( pItem->pChild && pItem->bExpanded ){
+	if( pItem->pChild && (pItem->bExpanded || pItem == m_pRootItem)){
 		nParentCt ++;
 		return pItem->pChild;
 		}
@@ -480,11 +480,13 @@ ESChildControlPropertyGrid::DeletePropertyItem(ESPropertyGridItem* pItem){
 
 int
 ESChildControlPropertyGrid::GetVisibleItemCt(){
-	int					nCt			= 0, nParentCt	= 0;
-	ESPropertyGridItem* pItem		= GetNextVisibleItem(m_pRootItem, nParentCt);
-	while( pItem ){
-		pItem = GetNextVisibleItem(pItem, nParentCt); nCt ++;
-		}
+	int nCt = 0, nParentCt = 0;
+    if(m_pRootItem){
+        ESPropertyGridItem* pItem = GetNextVisibleItem(m_pRootItem, nParentCt);
+        while( pItem ){
+            pItem = GetNextVisibleItem(pItem, nParentCt); nCt ++;
+        }
+    }
 	return nCt;
 	}
 

@@ -57,7 +57,17 @@ _Font::CopyFont(_Font* pCopyInto){
 		return FALSE;
 	LOGFONT lf;
 	GetLogFont(&lf);
-	return pCopyInto->CreateFontIndirect(&lf);
+    
+    if(pCopyInto->IsNull()){
+        return pCopyInto->CreateFontIndirect(&lf);
+    }
+    
+    auto fontDef = pCopyInto->Detach();
+	auto ret = pCopyInto->CreateFontIndirect(&lf);
+    if(!ret){
+        pCopyInto->Attach(fontDef);
+    }
+    return ret;
 	}
 
 BOOL

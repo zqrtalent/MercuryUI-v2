@@ -192,8 +192,9 @@ void
 ESChildTextBox::SetTextFont(_Font* pFont, bool bRedraw /*= false*/){
 	if( !pFont ) return;
 
-	if( pFont != &m_textFont )
+    if( pFont != &m_textFont ){
 		pFont->CopyFont(&m_textFont);
+    }
 
 	if( !pFont->IsNull() ){
 		CalcTextDimensions(&m_sText);

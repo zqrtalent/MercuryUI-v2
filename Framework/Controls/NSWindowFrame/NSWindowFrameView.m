@@ -169,7 +169,7 @@
         NSPoint pt = [theEvent locationInWindow];
         NSPoint ptView = [self convertPoint:pt toView:self];
         _pMercuryView->OnMouseMove(nFlags, _Point(ptView.x, [self bounds].size.height - ptView.y));
-        NSLog(@"mouse moved1 - buttonNumber %ld", (long)[theEvent subtype]);
+        //NSLog(@"mouse moved1 - buttonNumber %ld", (long)[theEvent subtype]);
     }
 }
 
@@ -300,6 +300,24 @@
         NSPoint pt = [theEvent locationInWindow];
         NSPoint ptView = [self convertPoint:pt toView:self];
         _pMercuryView->OnRButtonUp(0, _Point(ptView.x, [self bounds].size.height - ptView.y));
+    }
+}
+
+-(void)scrollWheel:(NSEvent *)theEvent
+{
+    [super scrollWheel:theEvent];
+    if(_pMercuryView != NULL)
+    {
+        NSPoint pt = [theEvent locationInWindow];
+        NSPoint ptView = [self convertPoint:pt toView:self];
+        //auto z = theEvent.deltaZ;
+        short y = (short)(theEvent.deltaY * 120);
+        //auto x = theEvent.deltaX;
+        
+        if(y != 0)
+        {
+            _pMercuryView->OnMouseWheel(0, y, _Point(ptView.x, [self bounds].size.height - ptView.y));
+        }
     }
 }
 

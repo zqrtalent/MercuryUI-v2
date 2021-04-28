@@ -90,8 +90,9 @@ ESChildScrollView::Create(int nId, _Rect rRect, MercuryBaseView* pOwner, ESChild
 			m_pVScroll->SetSerializeFlag(false);
 			m_pVScroll->SetFixedPosition(rcFixedPos);
 			m_pVScroll->SetVisible		(false, false);
+            m_pVScroll->AllowMouseEvents(true);
 			}
-
+        
 		if( !m_imageHScrollThumb.IsNull() )
 			m_pHScroll->m_pImageHScrollThumb = &m_imageHScrollThumb;
 		if( !m_imageHScrollArrowRightSel.IsNull() )
@@ -116,6 +117,7 @@ ESChildScrollView::Create(int nId, _Rect rRect, MercuryBaseView* pOwner, ESChild
 			m_pHScroll->SetSerializeFlag(false);
 			m_pHScroll->SetFixedPosition(rcFixedPos);
 			m_pHScroll->SetVisible		(false, false);
+            m_pHScroll->AllowMouseEvents(true);
 			}
 		AdjustScrollBarPos(false);
 		}

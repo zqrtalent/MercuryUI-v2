@@ -244,7 +244,7 @@ MercuryLayer::GetChildsByPoint(_Point& pt, CPtrArray& arrControls){
 	int		nRet = 0;
 	for(int i=0; i<m_arrChildControlById.GetCount(); i++){
 		ESChildControl* pChild = (ESChildControl*)m_arrChildControlById.GetData(i);
-		if( pChild && (pChild->IsMouseEventsAllowed() || pChild->IsDesignerMode()) ){
+		if( pChild && (pChild->IsDesignerMode() || pChild->IsMouseEventsAllowed())){
 		//	rcChild = pChild->GetClientRect();
 		//	if( rcChild.PtInRect(pt) ){
 			if( pChild->PtInClientArea(pt) ){
